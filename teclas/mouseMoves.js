@@ -1,14 +1,16 @@
 var cuadrito = document.getElementById("area_de_dibujo");
 var papel = cuadrito.getContext("2d");
+var boton = document.getElementById('botoncito');
+boton.addEventListener("click", limpiarCanvas);
 
 //definiendo los eventos del mouse a considerar
 cuadrito.addEventListener("mousemove", dibujarMouse);
 cuadrito.addEventListener("mousedown", comenzarTrazo);
 cuadrito.addEventListener("mouseup", terminarTrazo);
 var banderaDibujo = false ; //variable que indica cuando se puede dibujar
-var xi, yi;
-var xf =0;
-var yf = 0;
+var xi, yi, xf, yf;
+
+dibujarMarco(); //llamando a la funcion para delimitar el area de dibujo
 
 
 function dibujarMouse(evento)
@@ -40,7 +42,16 @@ function terminarTrazo()
   banderaDibujo = false;
 }
 
+//Funcion para limpiar el marco
+function limpiarCanvas() {
 
+  papel.clearRect(0, 0, cuadrito.width, cuadrito.height);
+  dibujarMarco();
+
+}
+
+
+//Funcion para dibujar
 function dibujarLinea(color, xinicial, yinicial, xfinal, yfinal, lienzo)
 {
 
@@ -56,7 +67,11 @@ function dibujarLinea(color, xinicial, yinicial, xfinal, yfinal, lienzo)
 
 
 //Marco del area de dibujo
-dibujarLinea("black", 1,1,1,299,papel);
-dibujarLinea("black", 299,299,1,299,papel);
-dibujarLinea("black", 299,299,299,1,papel);
-dibujarLinea("black", 1,1,299,1,papel);
+function dibujarMarco()
+{
+  dibujarLinea("black", 1,1,1,299,papel);
+  dibujarLinea("black", 299,299,1,299,papel);
+  dibujarLinea("black", 299,299,299,1,papel);
+  dibujarLinea("black", 1,1,299,1,papel);
+
+}
