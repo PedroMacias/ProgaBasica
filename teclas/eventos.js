@@ -5,8 +5,6 @@ var teclas = {
   DOWN:  40
 };
 
-console.log(teclas);
-
 document.addEventListener("keyup", dibujarTeclado);
 var cuadrito = document.getElementById("area_de_dibujo");
 var papel = cuadrito.getContext("2d");
