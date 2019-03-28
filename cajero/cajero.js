@@ -9,8 +9,23 @@ class Billete {
 function entregarDinero()
 {
 
+  var a = 0;
+  for (var pi of caja) {
+    a += pi.valor * pi.cantidad;
+  }
+  saldo.innerHTML = "Saldo actual: " + a;
+
   var t = document.getElementById("dinero");
   dinero = parseInt(t.value);
+
+  if (dinero > a ) {
+    return resultado.innerHTML = "No tengo dinero suficiente";
+  }
+
+  if ((dinero % 10) != 0) {
+    return resultado.innerHTML = "No puedo entregarte la cantidad requerida";
+  }
+
   for (var bi of caja)
   {
     if (dinero > 0)
@@ -38,6 +53,7 @@ function entregarDinero()
   }
   else
   {
+      resultado.innerHTML = "";      
       for (var e of entregado)
       {
         if (e.cantidad > 0 )
@@ -45,9 +61,19 @@ function entregarDinero()
             resultado.innerHTML += e.cantidad + " billetes de $" + e.valor + "<br />";
         }
       }
+
   }
 
 
+}
+
+function mostrarSaldo()
+{
+    var a = 0;
+    for (var pi of caja) {
+      a += pi.valor * pi.cantidad;
+    }
+    saldo.innerHTML = "Saldo actual: " + a;
 }
 
 var caja = [];
@@ -60,6 +86,7 @@ var dinero = 0;
 var div = 0;
 var papeles = 0;
 
+var saldo = document.getElementById("saldo");
 var resultado = document.getElementById("resultado");
 var b = document.getElementById("extraer");
 b.addEventListener("click", entregarDinero);
