@@ -66,10 +66,17 @@ updateSaldo();
 function updateSaldo()
 {
 
- for (var x = 0; x < caja.length; x++) {
-   caja[x].cantidad = caja[x].cantidad - entregado[x].cantidad;
-   resultado.innerHTML += "otros " + caja[x].cantidad + " billetes de $" + caja[x].valor + " en Caja" + "<br />";
-   mostrarSaldo();
+ for (var x = 0; x < caja.length; x++)
+ {
+   if (caja[x].cantidad >= entregado[x].cantidad) {
+     caja[x].cantidad = caja[x].cantidad - entregado[x].cantidad;
+   }
+   else
+   {
+     caja[x].cantidad = caja[x].cantidad;
+   }
+    resultado.innerHTML += "otros " + caja[x].cantidad + " billetes de $" + caja[x].valor + " en Caja" + "<br />";
+    mostrarSaldo();
  }
 
 }
